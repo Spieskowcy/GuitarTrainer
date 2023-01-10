@@ -2,8 +2,6 @@
 #include "gtest/gtest.h"
 
 #include "FFT.hpp"
-#include "FFT.cpp"
-#include "Segment.cpp"
 
 TEST(fftTest, arrayOfOnesTest){
     constexpr int PROBES_NO = 32;
