@@ -6,6 +6,7 @@ public:
     Segment(int probesNo);
     ~Segment();
 
+    int probesNo;
     float* rawSignal;
     float* afterFFT;
 };
