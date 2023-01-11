@@ -11,6 +11,7 @@ WavHandler::WavHandler(const char* filePath)
 {
     this->filePath = filePath;
     wavFile = fopen(filePath, "r");
+    buffer = new int8_t[BUFFER_SIZE];
     ProcessHeaders();
 }
 
@@ -38,7 +39,6 @@ void WavHandler::ProcessHeaders()
 
     //Read the header
     size_t bytesRead = fread(&wavHeader, 1, headerSize, wavFile);
-    cout << "Header Read " << bytesRead << " bytes." << endl;
     
     if (bytesRead > 0)
     {
@@ -47,6 +47,7 @@ void WavHandler::ProcessHeaders()
 
         filelength = GetFileSize();
 
+        /*
         cout << "File is                    :" << filelength << " bytes." << endl;
         cout << "RIFF header                :" << wavHeader.RIFF[0] << wavHeader.RIFF[1] << wavHeader.RIFF[2] << wavHeader.RIFF[3] << endl;
         cout << "WAVE header                :" << wavHeader.WAVE[0] << wavHeader.WAVE[1] << wavHeader.WAVE[2] << wavHeader.WAVE[3] << endl;
@@ -64,14 +65,13 @@ void WavHandler::ProcessHeaders()
 
         cout << "Block align                :" << wavHeader.blockAlign << endl;
         cout << "Data string                :" << wavHeader.Subchunk2ID[0] << wavHeader.Subchunk2ID[1] << wavHeader.Subchunk2ID[2] << wavHeader.Subchunk2ID[3] << endl;
+        */
     }
 }
 
 void WavHandler::ReadRawData(Segment *seg)
 {
     size_t bytesRead;
-    const uint16_t BUFFER_SIZE = sizeof(seg->rawSignal[0]);
-    int8_t* buffer = new int8_t[BUFFER_SIZE];
     //data is in little endian
 
     for(int i=0; i<seg->probesNo; i++)
@@ -89,8 +89,6 @@ void WavHandler::ReadRawData(Segment *seg)
         }
         seg->rawSignal[i] = value;
     }
-    delete [] buffer;
-    buffer = nullptr;
 }
 
 bool WavHandler::FinishedReading()
@@ -100,5 +98,6 @@ bool WavHandler::FinishedReading()
 
 WavHandler::~WavHandler()
 {
+    delete [] buffer;
     fclose(wavFile);
 }

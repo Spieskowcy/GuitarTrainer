@@ -33,15 +33,18 @@ class WavHandler
 {
     private:
     FILE* wavFile;
-    wav_hdr wavHeader;
     const char* filePath;
     uint16_t bytesPerSample;
     uint64_t numSamples;
     bool finished = false;
+    const uint16_t BUFFER_SIZE = sizeof(float);
+    int8_t* buffer;
 
     int GetFileSize();
 
     public:
+    wav_hdr wavHeader;
+    
     WavHandler(const char* filePath);
     ~WavHandler();
 
