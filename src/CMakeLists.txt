@@ -7,5 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(BINARY ${CMAKE_PROJECT_NAME})
 file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.h *.cpp)
 
+
 add_library(${BINARY}_lib STATIC ${SOURCES})
+target_link_libraries(${BINARY}_lib -lmkl_core -lmkl_intel_lp64 -lmkl_intel_thread -liomp5 -lpthread)
 target_include_directories(${BINARY}_lib PUBLIC .)
