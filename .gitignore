@@ -6,3 +6,4 @@ Makefile
 Testing/
 _deps/
 cmake_install.cmake
+a.out
