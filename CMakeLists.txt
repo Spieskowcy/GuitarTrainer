@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.15)
 
 project(GuitarTrainer)
-
-include_directories(/usr/include/mkl/)
+set(MKL_DIR $ENV{MKLROOT}/lib/cmake/mkl)
+find_package(MKL CONFIG REQUIRED)
 
 enable_testing()
 add_subdirectory(src)
