@@ -2,7 +2,9 @@
 App reads data from .wav file in fmt format
 
 to install mkl:
-    sudo apt install intel-mkl
-    
-    in installer only click 'ok' every time
+```bash
+wget https://registrationcenter-download.intel.com/akdlm/irc_nas/19138/l_onemkl_p_2023.0.0.25398.sh
+
+sudo sh ./l_onemkl_p_2023.0.0.25398.sh
+```
 
