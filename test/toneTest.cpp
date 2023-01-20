@@ -18,6 +18,20 @@ std::unique_ptr<float[]> sinA(float ampl, float freq, float sampleRate, float th
     return arr;
 }
 
+TEST(toneTest, independentDTest){
+    size_t probeSize = 1024 * 4;
+    Segment seg(probeSize);
+
+
+    seg.afterFFT[14] = 1000;
+
+    ToneModule tone(probeSize);
+
+    Tone output = tone.process(&seg);
+
+    ASSERT_EQ(output.getSound(), Note::D);
+}
+
 TEST(toneTest, sinATest){
     size_t probeSize = 1024;
     Segment seg(probeSize);
