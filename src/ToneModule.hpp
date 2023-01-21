@@ -4,10 +4,11 @@
 
 class ToneModule{
 public:
- explicit ToneModule(int probeSize);
+ explicit ToneModule(int probeSize, float sampleRate);
 
  Tone process(Segment* in);
 private:
  int probeSize;
+ float sampleRate;
 };
 

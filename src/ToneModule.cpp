@@ -1,7 +1,7 @@
 #include "ToneModule.hpp"
 #include<cmath>
 
-ToneModule::ToneModule(int probeSize):probeSize(probeSize){ }
+ToneModule::ToneModule(int probeSize, float sampleRate):probeSize(probeSize), sampleRate(sampleRate){ }
 
 Tone ToneModule::process(Segment* seg){
     int maxi = 0;
@@ -12,5 +12,5 @@ Tone ToneModule::process(Segment* seg){
             maxi = i;
         }
     }
-    return (double)maxi * (44100.0 / probeSize / 2.0);
+    return (double)maxi * (sampleRate / probeSize / 2.0);
 }

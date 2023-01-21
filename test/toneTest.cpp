@@ -20,12 +20,13 @@ std::unique_ptr<float[]> sinA(float ampl, float freq, float sampleRate, float th
 
 TEST(toneTest, independentDTest){
     size_t probeSize = 1024 * 4;
+    float sampleRate = 44100;
     Segment seg(probeSize);
 
 
     seg.afterFFT[14] = 1000;
 
-    ToneModule tone(probeSize);
+    ToneModule tone(probeSize, sampleRate);
 
     Tone output = tone.process(&seg);
 
@@ -34,13 +35,14 @@ TEST(toneTest, independentDTest){
 
 TEST(toneTest, sinATest){
     size_t probeSize = 1024;
+    float sampleRate = 44100;
     Segment seg(probeSize);
     FFT fft(probeSize);
 
-    seg.rawSignal = sinA(1, 440, 1.0/44100, 0, probeSize).release();
+    seg.rawSignal = sinA(1, 440, 1.0/sampleRate, 0, probeSize).release();
     fft.Calculate(&seg);
 
-    ToneModule tone(probeSize);
+    ToneModule tone(probeSize, sampleRate);
 
     Tone output = tone.process(&seg);
 
@@ -49,13 +51,14 @@ TEST(toneTest, sinATest){
 
 TEST(toneTest, sinCTest){
     size_t probeSize = 1024 * 4;
+    float sampleRate = 44100;
     Segment seg(probeSize);
     FFT fft(probeSize);
 
-    seg.rawSignal = sinA(1, 261, 1.0/44100, 0, probeSize).release();
+    seg.rawSignal = sinA(1, 261, 1.0/sampleRate, 0, probeSize).release();
     fft.Calculate(&seg);
 
-    ToneModule tone(probeSize);
+    ToneModule tone(probeSize, sampleRate);
 
     Tone output = tone.process(&seg);
 
@@ -64,10 +67,11 @@ TEST(toneTest, sinCTest){
 
 TEST(toneTest, wavATest){
     size_t probeSize = 1024 * 16;
+    float sampleRate = 44100;
     WavHandler wav_hdr("../rsc/a_p.wav");
     Segment seg(probeSize);
     FFT fft(probeSize);
-    ToneModule tone(probeSize);
+    ToneModule tone(probeSize, sampleRate);
 
     while(!wav_hdr.FinishedReading()) {
         wav_hdr.ReadRawData(&seg);
