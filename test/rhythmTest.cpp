@@ -1,6 +1,7 @@
 #pragma once
 #include "gtest/gtest.h"
 
+#include "RhythmModule.hpp"
 #include "OnsetDetectionFunction.hpp"
 #include <iostream>
 
@@ -25,6 +26,17 @@ TEST(rhythmTest, ODFTest2){
 	data[0] = 0.0;
         returnedValue = odf.calculateDF(data);
         ASSERT_EQ(returnedValue, 0);
+}
+
+TEST(rhythmTest, CumulativeScoreTest){
+        size_t frameProbesNo = 1024, hopProbesNo = 512;
+        double data[512] = { 1 };
+	auto rhythmModule = RhythmModule(frameProbesNo, hopProbesNo);
+	rhythmModule.processFrame(data);
+	double lastScore = rhythmModule.getLastCumulativeScore();
+	std::cout << "abc: " << lastScore << "\n";
+	ASSERT_EQ(lastScore, 0.1);
+
 }
 
 
