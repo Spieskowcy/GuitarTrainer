@@ -1,5 +1,6 @@
 #include "RhythmModule.hpp"
 #include <cmath>
+#include <iostream>
 
 RhythmModule::RhythmModule(int frameProbesNo, int hopProbesNo)
 : df(frameProbesNo, hopProbesNo)
@@ -9,19 +10,20 @@ RhythmModule::RhythmModule(int frameProbesNo, int hopProbesNo)
 	this->tempo = 120;
 	this->DFBuffSize = hopProbesNo;
 	this->cumulativeScore = new double[DFBuffSize];
-	//this->beatPeriod = round((60 / (hopProbesNo / 44100)) * tempo);
-	this->beatPeriod = 1024;
+	double tmp = hopProbesNo*tempo/44100;	
+	this->beatPeriod = 60 / tmp;
+	//this->beatPeriod = 43;
 	this->beatIsPresent = false;
 	zeroArrays();
 }
 
 RhythmModule::~RhythmModule(){
-	df.~OnsetDetectionFunction();
-}
+	delete[] cumulativeScore;
 
+}
 void RhythmModule::zeroArrays(){
 	for(int i = 0; i < DFBuffSize; i++){
-		cumulativeScore[i] = 0;
+		cumulativeScore[i] = 0.0;
 	}
 }
 
@@ -38,31 +40,33 @@ double RhythmModule::getLastCumulativeScore(){
 
 void RhythmModule::processFrame(double* frame){
 	double sample = df.calculateDF(frame);
-	calculateCumulativeScore(sample);
-	beatCtr--;
-	if((--beatCtr) == 0){
-		beatIsPresent = true;
-	}
+	return calculateCumulativeScore(sample);
+	//if((--beatCtr) == 0){
+	//	beatIsPresent = true;
+//	}
 }
 
 void RhythmModule::calculateCumulativeScore(double sample){
 	int minV = -round(2 * beatPeriod);
 	int maxV = -round(beatPeriod / 2);
-	double W[maxV - minV + 1];
+	double* W = new double[maxV - minV + 1];
 
-	for(int v = minV; v <  maxV + 1; v++){
+	for(int v = minV; v <  maxV+1; v++){
 		W[v-minV] = exp((-pow(eta * log(-v / beatPeriod),2)) / 2);
 	}
 
 	double max = 0, tmp = 0;
 	int v = 0;
 
-	for(int i = DFBuffSize - minV; i < DFBuffSize -maxV; i++){
-		tmp = cumulativeScore[i] * W[v];
+	for(int i = DFBuffSize + minV; i <= DFBuffSize + maxV; i++){
+		tmp = cumulativeScore[i] * W[v++];
 		if(tmp > max) max = tmp;
 	}
+	
+	double score = ((1-alpha) * sample) + (alpha * max );
 
-	addNewCumulativeScore( (1-alpha) * sample + alpha * max );
+	addNewCumulativeScore( score );
+	delete[] W;
 }
 
 

@@ -4,7 +4,10 @@
 #include "RhythmModule.hpp"
 #include "OnsetDetectionFunction.hpp"
 #include <iostream>
+#include <string.h>
 
+
+#define EPSILON 0.00001
 
 TEST(rhythmTest, ODFTest1){
 	size_t frameProbesNo = 1024, hopProbesNo = 512;
@@ -30,12 +33,11 @@ TEST(rhythmTest, ODFTest2){
 
 TEST(rhythmTest, CumulativeScoreTest){
         size_t frameProbesNo = 1024, hopProbesNo = 512;
-        double data[512] = { 1 };
+        double data[512] = { 2.0 };
 	auto rhythmModule = RhythmModule(frameProbesNo, hopProbesNo);
 	rhythmModule.processFrame(data);
 	double lastScore = rhythmModule.getLastCumulativeScore();
-	std::cout << "abc: " << lastScore << "\n";
-	ASSERT_EQ(lastScore, 0.1);
+	ASSERT_NEAR(lastScore, 0.4, EPSILON);
 
 }
 
