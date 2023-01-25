@@ -1,25 +1,18 @@
 #pragma once
 #include "OnsetDetectionFunction.hpp"
+#include "BeatFinder.hpp"
 
 class RhythmModule{
 public:
 	RhythmModule(int frameProbesNo, int hopProbesNo);
 	~RhythmModule();
-	void processFrame(double* frame);
-	double getLastCumulativeScore();
+	void processFrame(double* frame);			// searches for beat and finds tempo between them
+	double getLastCumulativeScore();			// returns latest calculated cumulative score 
 
 private:
-	double alpha;		// balance between new info in DF and past info
-	double beatPeriod, tempo;
-	double eta;		// tightness of the transition weighting
-//	double m0;
+	double tempo;
 	OnsetDetectionFunction df;
-	int DFBuffSize;
-	double* cumulativeScore;
+	BeatFinder bFinder;
 	bool beatIsPresent;
 	int beatCtr;
-	
-	void zeroArrays();
-	void addNewCumulativeScore(double cumScore);
-	void calculateCumulativeScore(double sample);
 };

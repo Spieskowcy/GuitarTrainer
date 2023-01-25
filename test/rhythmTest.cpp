@@ -12,7 +12,7 @@
 TEST(rhythmTest, ODFTest1){
 	size_t frameProbesNo = 1024, hopProbesNo = 512;
 	double data[512] = { 1 };
-	auto odf = OnsetDetectionFunction(frameProbesNo, hopProbesNo);
+	auto odf = OnsetDetectionFunction(frameProbesNo, hopProbesNo, 512);
 	double returnedValue = odf.calculateDF(data);
 	ASSERT_EQ(returnedValue, 1);
 }
@@ -20,7 +20,7 @@ TEST(rhythmTest, ODFTest1){
 TEST(rhythmTest, ODFTest2){
 	size_t frameProbesNo = 1024, hopProbesNo = 512;
         double data[512] = { 2.0 };
-	auto odf = OnsetDetectionFunction(frameProbesNo, hopProbesNo);
+	auto odf = OnsetDetectionFunction(frameProbesNo, hopProbesNo, 512);
         double returnedValue = odf.calculateDF(data);
         ASSERT_EQ(returnedValue, 4.0);
 	data[0] = 1.1;
