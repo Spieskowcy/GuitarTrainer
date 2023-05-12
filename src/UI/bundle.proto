@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+message Exercise {
+    required string title = 1;
+    optional string tooltip = 2;
+    required string file = 3;
+}
+
+message Bundle{
+    repeated Exercise exercises = 1;
+}
