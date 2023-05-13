@@ -51,7 +51,7 @@ border-radius:20px;</string>
     <property name="font">
      <font>
       <family>Franklin Gothic Demi</family>
-      <pointsize>12</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -132,7 +132,7 @@ padding-bottom:7px;
     <property name="font">
      <font>
       <family>Franklin Gothic Demi</family>
-      <pointsize>12</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -151,10 +151,10 @@ border-radius:5px;
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>90</x>
       <y>50</y>
-      <width>141</width>
-      <height>51</height>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
@@ -168,6 +168,34 @@ border-radius:5px;
     </property>
     <property name="text">
      <string>Welcome!</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exit">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>50</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Franklin Gothic Demi</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">bacground-color:rgba(0, 0, 0, 0);
+border:2px solid rgba(255, 222, 175, 0.8);
+color:rgba(255, 255, 255, 230);
+padding-bottom:7px;
+border-radius:5px;
+
+</string>
+    </property>
+    <property name="text">
+     <string>X</string>
     </property>
    </widget>
   </widget>
