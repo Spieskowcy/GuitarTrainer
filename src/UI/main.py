@@ -6,6 +6,8 @@ from PySide6.QtWidgets import QStackedWidget, QApplication, QMainWindow, QWidget
     QComboBox, QLabel
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import Slot, Qt
+import UI.images.res2
+import UI.images.res
 
 
 class ResultsScreen(QMainWindow):
@@ -29,10 +31,10 @@ class ResultsScreen(QMainWindow):
         # change widgets properties
         self.window.evaluation.setReadOnly(True)
         self.window.prettyBack.setAutoFillBackground(True)
-        self.window.prettyBack.setStyleSheet("border-image: url(:/images/PianoHero.png)")
-        pixmap = QtGui.QPixmap('images/PianoHero.png')
-        self.window.prettyBack.setPixmap(pixmap)
-        self.window.setWindowFlag(Qt.FramelessWindowHint)
+        # self.window.prettyBack.setStyleSheet("border-image: url(:/images/PianoHero.png)")
+        # pixmap = QtGui.QPixmap('images/PianoHero.png')
+        # self.window.prettyBack.setPixmap(pixmap)
+        # self.window.setWindowFlag(Qt.FramelessWindowHint)
         # self.show()
 
     @Slot()
@@ -64,8 +66,8 @@ class MainWindow(QMainWindow):
         self.window.pathFile.setReadOnly(True)
         #self.window.prettyBack.setAutoFillBackground(True)
         #self.window.prettyBack.setPicture(QPicture("/images/PianoHero.png"))
-        pixmap = QtGui.QPixmap('images/PianoHero.png')
-        self.window.prettyBack.setPixmap(pixmap)
+        # pixmap = QtGui.QPixmap('images/PianoHero.png')
+        # self.window.prettyBack.setPixmap(pixmap)
         #self.window.prettyBack.setStyleSheet("border-radius:20px;")
 
         self.window.setWindowFlag(Qt.FramelessWindowHint)
@@ -113,6 +115,8 @@ widget.addWidget(win2)
 widget.setFixedWidth(450)
 widget.setFixedHeight(550)
 widget.setWindowFlag(Qt.FramelessWindowHint)
+widget.setAttribute(Qt.WA_TranslucentBackground)
 widget.show()
+
 
 sys.exit(app.exec())
