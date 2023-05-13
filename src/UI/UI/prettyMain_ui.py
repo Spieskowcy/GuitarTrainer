@@ -82,26 +82,12 @@ class Ui_Form(object):
 "")
         self.label_2 = QLabel(self.widget)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(90, 50, 181, 71))
+        self.label_2.setGeometry(QRect(100, 60, 241, 71))
         font1 = QFont()
         font1.setFamilies([u"Niagara Engraved"])
         font1.setPointSize(48)
         self.label_2.setFont(font1)
         self.label_2.setStyleSheet(u"color:rgba(255, 255, 255,210 );")
-        self.exit = QPushButton(self.widget)
-        self.exit.setObjectName(u"exit")
-        self.exit.setGeometry(QRect(290, 50, 31, 21))
-        font2 = QFont()
-        font2.setFamilies([u"Franklin Gothic Demi"])
-        font2.setPointSize(10)
-        self.exit.setFont(font2)
-        self.exit.setStyleSheet(u"bacground-color:rgba(0, 0, 0, 0);\n"
-"border:2px solid rgba(255, 222, 175, 0.8);\n"
-"color:rgba(255, 255, 255, 230);\n"
-"padding-bottom:7px;\n"
-"border-radius:5px;\n"
-"\n"
-"")
 
         self.retranslateUi(Form)
 
@@ -118,6 +104,5 @@ class Ui_Form(object):
 
         self.evaluateButt.setText(QCoreApplication.translate("Form", u"evaluate", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Welcome!", None))
-        self.exit.setText(QCoreApplication.translate("Form", u"X", None))
     # retranslateUi
 
