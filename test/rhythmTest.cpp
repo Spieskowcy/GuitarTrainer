@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string.h>
 
-TEST(xdTest, 120bpm){
+TEST(rhythmTest, 120bpm){
         char filePath[20] = "../rsc/120bpm.wav";
 	Rhythm rhythmM;
 	rhythmM.ReadSegments(filePath);
@@ -16,7 +16,7 @@ TEST(xdTest, 120bpm){
 
 }
 
-TEST(xdTest, 150bpm){
+TEST(rhythmTest, 150bpm){
         char filePath[20] = "../rsc/150bpm.wav";
         Rhythm rhythmM;
         rhythmM.ReadSegments(filePath);
