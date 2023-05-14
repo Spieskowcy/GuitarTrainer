@@ -12,7 +12,7 @@ WavHandler::WavHandler(const char* filePath)
     this->filePath = filePath;
     wavFile = fopen(filePath, "r");
     buffer = new int8_t[BUFFER_SIZE];
-    ProcessHeaders();
+    ProcessHeaders(); 
 }
 
 // find the file size
@@ -42,9 +42,6 @@ void WavHandler::ProcessHeaders()
     
     if (bytesRead > 0)
     {
-        uint16_t bytesPerSample = wavHeader.bitsPerSample / 8;      //Number     of bytes per sample
-        uint64_t numSamples = wavHeader.ChunkSize / bytesPerSample; //How many samples are in the wav file
-
         filelength = GetFileSize();
     }
 }
