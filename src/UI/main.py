@@ -1,9 +1,10 @@
 import sys
 
+
 from PySide6 import QtGui, QtCore
 from PySide6.QtGui import QPicture
 from PySide6.QtWidgets import QStackedWidget, QApplication, QMainWindow, QWidget, QPushButton, QLineEdit, QFileDialog, \
-    QComboBox, QLabel
+    QComboBox, QLabel, QMessageBox
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import Slot, Qt
 import UI.images.res2
@@ -64,11 +65,7 @@ class MainWindow(QMainWindow):
 
         # change widgets properties
         self.window.pathFile.setReadOnly(True)
-        #self.window.prettyBack.setAutoFillBackground(True)
-        #self.window.prettyBack.setPicture(QPicture("/images/PianoHero.png"))
-        # pixmap = QtGui.QPixmap('images/PianoHero.png')
-        # self.window.prettyBack.setPixmap(pixmap)
-        #self.window.prettyBack.setStyleSheet("border-radius:20px;")
+
 
         self.window.setWindowFlag(Qt.FramelessWindowHint)
         # self.show()
@@ -81,15 +78,21 @@ class MainWindow(QMainWindow):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
-                                                  "All Files (*);;Python Files (*.py)", options=options)
+                                                  "*.wav", options=options)
         if fileName:
             return fileName
 
     def on_evaluate(self):
         if self.window.pathFile.text():
             widget.setCurrentWidget(widget.widget(widget.currentIndex() + 1))
+        else:
+            msgBox = QMessageBox()
+            msgBox.setText("File not attached")
+            msgBox.setWindowTitle("Error")
+            msgBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.exec()
 
-
+#QMessageBox
 # if __name__ == '__main__':
 # bundle_path = "."
 # files = [f for f in listdir(bundle_path) if isfile(join(bundle_path, f)) and f.endswith('.bnd')]
