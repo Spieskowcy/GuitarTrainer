@@ -9,6 +9,8 @@ from PySide6.QtCore import Slot, Qt
 from PySide6.QtCharts import QBarSet, QChartView, QValueAxis, QBarCategoryAxis, QChart, QBarSeries
 import UI.images.res2
 import UI.images.res
+import wave
+import pyaudio
 
 
 class ResultsScreen(QMainWindow):
@@ -24,7 +26,7 @@ class ResultsScreen(QMainWindow):
 
         # load ui
         loader = QUiLoader()
-        self.window = loader.load("UI\\prettyResults.ui", self)
+        self.window = loader.load(r"UI/prettyResults.ui", self)
 
         # connect signals
         self.window.menuButt.clicked.connect(self.menu_onclick)
@@ -69,7 +71,7 @@ class ResultsScreen(QMainWindow):
         chart.setBackgroundVisible(False)
 
         # Set font color
-        font_color = QColor(255, 255, 255)  # Red color
+        font_color = QColor(255, 255, 255)
         axis_x.setLabelsBrush(font_color)
         axis_y.setLabelsBrush(font_color)
         chart.legend().setLabelColor(font_color)
@@ -99,14 +101,16 @@ class MainWindow(QMainWindow):
         self.window.pathFile = QLineEdit()
         self.window.listOfExercises = QComboBox()
         self.window.prettyBack = QLabel()
+        self.window.playButt = QPushButton()
 
         # load ui
         loader = QUiLoader()
-        self.window = loader.load("UI\\prettyMain.ui", self)
+        self.window = loader.load(r"UI/prettyMain.ui", self)
 
         # connect signals
         self.window.uploadButt.clicked.connect(self.on_upload)
         self.window.evaluateButt.clicked.connect(self.on_evaluate)
+        self.window.playButt.clicked.connect(self.on_play)
 
         # change widgets properties
         self.window.pathFile.setReadOnly(True)
@@ -122,6 +126,33 @@ class MainWindow(QMainWindow):
                                                   "*.wav", options=options)
         if fileName:
             return fileName
+        
+    def on_play(self):
+        # Open the .wav file
+        wav_file = wave.open(r'UI/exercises/ex1.wav', 'rb')
+
+        # Initialize PyAudio
+        audio = pyaudio.PyAudio()
+
+        # Open a stream to play the audio
+        stream = audio.open(format=audio.get_format_from_width(wav_file.getsampwidth()),
+                            channels=wav_file.getnchannels(),
+                            rate=wav_file.getframerate(),
+                            output=True)
+
+        # Read and play the audio in chunks
+        chunk_size = 1024
+        data = wav_file.readframes(chunk_size)
+        while data:
+            stream.write(data)
+            data = wav_file.readframes(chunk_size)
+
+        # Close the stream and terminate PyAudio
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
+        wav_file.close()
+
 
     def on_evaluate(self):
         if self.window.pathFile.text():
