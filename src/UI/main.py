@@ -1,12 +1,12 @@
 import sys
 
-
 from PySide6 import QtGui, QtCore
-from PySide6.QtGui import QPicture
+from PySide6.QtGui import QPicture, QPainter, QFont, QColor
 from PySide6.QtWidgets import QStackedWidget, QApplication, QMainWindow, QWidget, QPushButton, QLineEdit, QFileDialog, \
-    QComboBox, QLabel, QMessageBox
+    QComboBox, QLabel, QMessageBox, QFrame
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import Slot, Qt
+from PySide6.QtCharts import QBarSet, QChartView, QValueAxis, QBarCategoryAxis, QChart, QBarSeries
 import UI.images.res2
 import UI.images.res
 
@@ -19,8 +19,8 @@ class ResultsScreen(QMainWindow):
         self.window = QWidget()
         self.window.menuButt = QPushButton()
         self.window.resultsTitle = QLineEdit()
-        self.window.evaluation = QLineEdit()
         self.window.prettyBack = QLabel()
+        self.window.chartView = QWidget()
 
         # load ui
         loader = QUiLoader()
@@ -30,13 +30,58 @@ class ResultsScreen(QMainWindow):
         self.window.menuButt.clicked.connect(self.menu_onclick)
 
         # change widgets properties
-        self.window.evaluation.setReadOnly(True)
         self.window.prettyBack.setAutoFillBackground(True)
-        # self.window.prettyBack.setStyleSheet("border-image: url(:/images/PianoHero.png)")
-        # pixmap = QtGui.QPixmap('images/PianoHero.png')
-        # self.window.prettyBack.setPixmap(pixmap)
-        # self.window.setWindowFlag(Qt.FramelessWindowHint)
-        # self.show()
+
+        self.create_chart(30, 70, 50)
+
+    def create_chart(self, p, r, a):
+        set_0 = QBarSet("pitch")
+        set_1 = QBarSet("rhythm")
+        set_2 = QBarSet("articulation")
+
+        set_0.append([p])
+        set_1.append([r])
+        set_2.append([a])
+
+        series = QBarSeries()
+        series.append(set_0)
+        series.append(set_1)
+        series.append(set_2)
+
+        chart = QChart()
+        chart.addSeries(series)
+        chart.setAnimationOptions(QChart.SeriesAnimations)
+
+        categories = ["your score"]
+        axis_x = QBarCategoryAxis()
+        axis_x.append(categories)
+        chart.addAxis(axis_x, Qt.AlignBottom)
+        series.attachAxis(axis_x)
+
+        axis_y = QValueAxis()
+        axis_y.setRange(0, 100)
+        chart.addAxis(axis_y, Qt.AlignLeft)
+        series.attachAxis(axis_y)
+
+        chart.legend().setVisible(True)
+        chart.legend().setAlignment(Qt.AlignBottom)
+        chart.legend().setBackgroundVisible(False)
+        chart.setBackgroundVisible(False)
+
+        # Set font color
+        font_color = QColor(255, 255, 255)  # Red color
+        axis_x.setLabelsBrush(font_color)
+        axis_y.setLabelsBrush(font_color)
+        chart.legend().setLabelColor(font_color)
+
+        chart_view = QChartView(chart)
+        chart_view.setRenderHint(QPainter.Antialiasing)
+        chart_view.setGeometry(0, 0, 300, 250)
+
+        # Set background color to transparent
+        chart_view.setStyleSheet("background-color: transparent;")
+
+        chart_view.setParent(self.window.chartView)
 
     @Slot()
     def menu_onclick(self):
@@ -66,10 +111,6 @@ class MainWindow(QMainWindow):
         # change widgets properties
         self.window.pathFile.setReadOnly(True)
 
-
-        self.window.setWindowFlag(Qt.FramelessWindowHint)
-        # self.show()
-
     @Slot()
     def on_upload(self):
         self.window.pathFile.setText(self.openFileNameDialog())
@@ -92,7 +133,8 @@ class MainWindow(QMainWindow):
             msgBox.setStandardButtons(QMessageBox.Ok)
             msgBox.exec()
 
-#QMessageBox
+
+# QMessageBox
 # if __name__ == '__main__':
 # bundle_path = "."
 # files = [f for f in listdir(bundle_path) if isfile(join(bundle_path, f)) and f.endswith('.bnd')]
@@ -120,6 +162,5 @@ widget.setFixedHeight(550)
 widget.setWindowFlag(Qt.FramelessWindowHint)
 widget.setAttribute(Qt.WA_TranslucentBackground)
 widget.show()
-
 
 sys.exit(app.exec())
