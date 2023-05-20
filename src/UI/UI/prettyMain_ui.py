@@ -61,7 +61,6 @@ class Ui_Form(object):
 "padding-bottom:7px;")
         self.listOfExercises = QComboBox(self.widget)
         self.listOfExercises.addItem("")
-        self.listOfExercises.addItem("")
         self.listOfExercises.setObjectName(u"listOfExercises")
         self.listOfExercises.setGeometry(QRect(80, 210, 141, 30))
         self.listOfExercises.setStyleSheet(u"bacground-color:rgba(0, 0, 0, 0);\n"
@@ -106,8 +105,7 @@ class Ui_Form(object):
         self.prettyBack.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.uploadButt.setText(QCoreApplication.translate("Form", u"upload file", None))
         self.pathFile.setText("")
-        self.listOfExercises.setItemText(0, QCoreApplication.translate("Form", u"pitch", None))
-        self.listOfExercises.setItemText(1, QCoreApplication.translate("Form", u"loudness", None))
+        self.listOfExercises.setItemText(0, QCoreApplication.translate("Form", u"ex1", None))
 
         self.evaluateButt.setText(QCoreApplication.translate("Form", u"evaluate", None))
         self.label.setText("")

@@ -129,7 +129,8 @@ class MainWindow(QMainWindow):
         
     def on_play(self):
         # Open the .wav file
-        wav_file = wave.open(r'UI/exercises/ex1.wav', 'rb')
+        path = r'UI/exercises/' + self.window.listOfExercises.currentText () + r'.wav'
+        wav_file = wave.open(path, 'rb')
 
         # Initialize PyAudio
         audio = pyaudio.PyAudio()

@@ -111,12 +111,7 @@ padding-bottom:7px;
     </property>
     <item>
      <property name="text">
-      <string>pitch</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>loudness</string>
+      <string>ex1</string>
      </property>
     </item>
    </widget>
