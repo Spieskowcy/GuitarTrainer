@@ -12,7 +12,6 @@ TEST(wavTest, temp){
     Segment seg(probeSize);
     std::ifstream correctData;
     float data;
-    float allowedError = 10000;
     correctData.open("../rsc/wavTestData.txt");
 
     ASSERT_EQ(wav_hdr.wavHeader.fmt[0], 'f');
@@ -24,7 +23,7 @@ TEST(wavTest, temp){
         for(int i=0; i<probeSize; i++)
         {
             correctData>>data;
-            ASSERT_NEAR(seg.rawSignal[i], data, allowedError);
+            ASSERT_EQ(seg.rawSignal[i], data);
         }
     }
     correctData.close();
