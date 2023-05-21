@@ -49,7 +49,6 @@ void WavHandler::ProcessHeaders()
 void WavHandler::ReadRawData(Segment *seg)
 {
     size_t bytesRead;
-    //data is in little endian
 
     for(int i=0; i<seg->probesNo; i++)
     {
@@ -62,7 +61,7 @@ void WavHandler::ReadRawData(Segment *seg)
         }
         for(int j=0; j<bytesRead; j++)
         {
-            value += buffer[j]<<8*(bytesRead-1-j);
+            value += buffer[j]<<8*j;
         }
         seg->rawSignal[i] = value;
     }

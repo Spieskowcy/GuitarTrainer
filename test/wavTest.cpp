@@ -8,11 +8,10 @@
 
 TEST(wavTest, temp){
     size_t probeSize = 1024;
-    WavHandler wav_hdr("../rsc/test3.wav");
+    WavHandler wav_hdr("../rsc/a_p.wav");
     Segment seg(probeSize);
     std::ifstream correctData;
     float data;
-    float allowedError = 0.1;
     correctData.open("../rsc/wavTestData.txt");
 
     ASSERT_EQ(wav_hdr.wavHeader.fmt[0], 'f');
@@ -24,8 +23,7 @@ TEST(wavTest, temp){
         for(int i=0; i<probeSize; i++)
         {
             correctData>>data;
-            if((abs(seg.rawSignal[i]) <= abs(data)*(1-allowedError) || abs(seg.rawSignal[i]) >= abs(data)*(1+allowedError)) && (data !=0 &&seg.rawSignal[i]==0))
-                FAIL();
+            ASSERT_EQ(seg.rawSignal[i], data);
         }
     }
     correctData.close();
