@@ -11,11 +11,11 @@ void ArticulationLength::CalculateLength()
         if(i<50)
             continue;
         
-        if(absRaw[i]>=STARTING_THRESHOLD && !hearable)
+        if(absRaw[i]>=STARTING_THRESHOLD && i-startIndex > ATTACK_TIME)
         {
             if(currentSound!=nullptr)
             {
-                delete currentSound;
+                SaveSound(i);
             }
             notHearableSoundCounter=0;
             hearable = true;

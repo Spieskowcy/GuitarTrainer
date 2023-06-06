@@ -18,11 +18,11 @@ struct Sound {
 
 class ArticulationLength {
 private:
-    const float STARTING_THRESHOLD = 250000000;
+    const float STARTING_THRESHOLD = 2000000000;
     const float CONTINUE_THRESHOLD = 210000000;
     const int COUNTER_THRESHOLD = 100;
-    const int MIN_LENGTH = 1000;
-    const int ATTACK_TIME = 1000;
+    const int MIN_LENGTH = 2000;
+    const int ATTACK_TIME = 2000;
 
     int numberOfSamples;
     int total = 0;
