@@ -1,4 +1,3 @@
-#pragma once
 #include "gtest/gtest.h"
 
 
@@ -33,7 +32,7 @@ TEST(articulationAmplitudeTest, FewTonesOneByOne){
 	}
 
 	//Act
-	Amplitude::ArticulationAmplitude module(PROBES_NO);
+	ArticulationAmplitude::Module module(PROBES_NO);
 	module.Calculate(segments);
 
 	//Assert

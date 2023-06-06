@@ -1,8 +1,8 @@
 #include "ArticulationAmplitude.hpp"
 
-using namespace Amplitude;
+using namespace ArticulationAmplitude;
 
-void ArticulationAmplitude::Calculate(std::vector<std::shared_ptr<Segment>> segments){
+void Module::Calculate(std::vector<std::shared_ptr<Segment>> segments){
 	float lastMax=0;
 	int seg_id = 0;
 	for(int i = 0; i < segments.size() - 1; i++){
@@ -29,9 +29,9 @@ void ArticulationAmplitude::Calculate(std::vector<std::shared_ptr<Segment>> segm
 	}
 }
 
-ArticulationAmplitude::MaxValue ArticulationAmplitude::GetMax(Segment &segment){
+Module::MaxValue Module::GetMax(Segment &segment){
 	MaxValue result;
-	
+
 	for(auto i = 0; i < probesNo; i++) {
 		auto probe = segment.afterFFT[i];
 		if(probe > result.value){

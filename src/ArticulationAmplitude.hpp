@@ -3,8 +3,7 @@
 #include <vector>
 #include <memory>
 
-
-namespace Amplitude {
+namespace ArticulationAmplitude {
 
 struct Sound {
 	Sound(float val, float freq, float diff, int seg_id) : val(val), freq(freq), diff(diff), segment_id(seg_id) {};
@@ -13,20 +12,18 @@ struct Sound {
 	float diff;
 	int segment_id;
 };
-class ArticulationAmplitude {
 
-typedef struct MaxValue {
-	float value = 0.0f;
-	float freq = 0.0f;
-};
-
+class Module {
 public:
-	ArticulationAmplitude(int probesNo) :probesNo(probesNo) {};
+	Module(int probesNo) : probesNo(probesNo) {};
 	
 	std::vector<Sound> sounds;
 	void Calculate(std::vector<std::shared_ptr<Segment>> segments);
 private:
-
+	struct MaxValue {
+		float value = 0.0f;
+		float freq = 0.0f;
+	};
 
 	MaxValue GetMax(Segment &segment);
 	int probesNo;
