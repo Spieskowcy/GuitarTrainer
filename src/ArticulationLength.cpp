@@ -6,44 +6,56 @@
 
 void ArticulationLength::CalculateLength() 
 {
-    Sound* currentSound = nullptr;
-    int startIndex;
     for(int i=0; i<total; i++)
     {
         if(i<50)
             continue;
-        if(absRaw[i]>=CONTINUE_THRESHOLD && hearable)
+        
+        if(absRaw[i]>=STARTING_THRESHOLD && !hearable)
         {
-            notHearableSoundCounter=0;
-        }
-        else if(absRaw[i]>=STARTING_THRESHOLD && !hearable)
-        {
+            if(currentSound!=nullptr)
+            {
+                delete currentSound;
+            }
             notHearableSoundCounter=0;
             hearable = true;
             currentSound = new Sound();
             startIndex=i;
+        }
+        else if(absRaw[i]>=CONTINUE_THRESHOLD && hearable)
+        {
+            notHearableSoundCounter=0;
         }
         else if(absRaw[i]<CONTINUE_THRESHOLD && hearable)
         {
             notHearableSoundCounter++;
             if(notHearableSoundCounter > COUNTER_THRESHOLD)
             {
-                currentSound->beginIndex=startIndex;
-                currentSound->beginSegment=startIndex/numberOfSamples;
-                currentSound->endIndex=i;
-                currentSound->endSegment=i/numberOfSamples;
-                currentSound->soundIndex=currentSoundIndex;
-                sounds.push_back(currentSound);
-
                 hearable = false;
-                currentSound++;
+                SaveSound(i);
+                
             }
         }
     }
 }
 
+void ArticulationLength::SaveSound(int currentIndex)
+{
+    if(currentIndex-startIndex<MIN_LENGTH)
+    {
+        return;
+    }
+    currentSound->beginIndex=startIndex;
+    currentSound->beginSegment=startIndex/numberOfSamples;
+    currentSound->endIndex=currentIndex;
+    currentSound->endSegment=currentIndex/numberOfSamples;
+    currentSound->soundIndex=currentSoundIndex;
+    sounds.push_back(currentSound);
+    currentSound++;
+    currentSound=nullptr;
+}
+
 void ArticulationLength::ReadSegments() {
-    std::ofstream out("xd.txt");
 	WavHandler handler(filePath.c_str());
     
     std::queue<Segment*> segments;
@@ -68,7 +80,6 @@ void ArticulationLength::ReadSegments() {
         {
             raw[currentIndex] = currentSegment->rawSignal[j];
             absRaw[currentIndex] = abs(raw[currentIndex]);
-            out<<std::fixed<<raw[currentIndex]<<std::endl;
             currentIndex++;
         }
         segments.pop();

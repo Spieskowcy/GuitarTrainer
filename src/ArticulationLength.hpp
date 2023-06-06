@@ -20,7 +20,9 @@ class ArticulationLength {
 private:
     const float STARTING_THRESHOLD = 250000000;
     const float CONTINUE_THRESHOLD = 210000000;
-    const float COUNTER_THRESHOLD = 100;
+    const int COUNTER_THRESHOLD = 100;
+    const int MIN_LENGTH = 1000;
+    const int ATTACK_TIME = 1000;
 
     int numberOfSamples;
     int total = 0;
@@ -31,6 +33,10 @@ private:
     int currentSoundIndex = 0;
     int notHearableSoundCounter = 0;
     bool hearable = false;
+    Sound* currentSound = nullptr;
+    int startIndex;
+
+    void SaveSound(int currentIndex);
 public:
     std::vector<Sound*> sounds;
 
