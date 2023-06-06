@@ -3,7 +3,6 @@
 
 
 #include "ArticulationAmplitude.hpp"
-#include <iostream>
 #include <string.h>
 #include <vector>
 #include <memory>
@@ -18,22 +17,29 @@ std::shared_ptr<Segment> GetSegment(float firstValue, int probes_no) {
 }
 
 TEST(articulationAmplitudeTest, FewTonesOneByOne){
+	//Arange
 	constexpr int PROBES_NO = 32;
 	constexpr int SEGMENTS_NO = 20;
 	std::vector<std::shared_ptr<Segment>> segments;
 
-	for(int i = 0; i < 10; i++){
-		segments.push_back(GetSegment(10-i, PROBES_NO));
-	}
-	for(int i = 10; i < SEGMENTS_NO; i++){
-		segments.push_back(GetSegment(15-i, PROBES_NO));
+	for(int i = 10; i >= 0; i--){
+		segments.push_back(GetSegment(i, PROBES_NO));
 	}
 
-	ArticulationAmplitude module(PROBES_NO);
+	segments.push_back(GetSegment(5,PROBES_NO));
+	
+	for(int i = 10; i >= 0; i--){
+		segments.push_back(GetSegment(i, PROBES_NO));
+	}
+
+	//Act
+	Amplitude::ArticulationAmplitude module(PROBES_NO);
 	module.Calculate(segments);
 
+	//Assert
 	ASSERT_EQ(2, module.sounds.size());
-	ASSERT_EQ(SEGMENTS_NO, segments.size());
+	ASSERT_EQ(0, module.sounds[0].segment_id);
+	ASSERT_EQ(12, module.sounds[1].segment_id);
 }
 
 
