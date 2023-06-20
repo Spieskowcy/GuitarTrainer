@@ -1,0 +1,5 @@
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS track.proto)
+# protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS EXPORT_MACRO DLL_EXPORT track.proto)
+# protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS DESCRIPTORS PROTO_DESCS track.proto)
+protobuf_generate_python(PROTO_PY bundle.proto)
+add_library(track ${PROTO_HDRS} ${PROTO_SRCS})
