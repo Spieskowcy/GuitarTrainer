@@ -11,7 +11,11 @@ import UI.images.res2
 import UI.images.res
 import wave
 import pyaudio
+import bundle_pb2
+import os
+import subprocess
 
+results = [100,100,100]
 
 class ResultsScreen(QMainWindow):
     def __init__(self, parent=None):
@@ -34,7 +38,6 @@ class ResultsScreen(QMainWindow):
         # change widgets properties
         self.window.prettyBack.setAutoFillBackground(True)
 
-        self.create_chart(30, 70, 50)
 
     def create_chart(self, p, r, a):
         set_0 = QBarSet("pitch")
@@ -107,6 +110,9 @@ class MainWindow(QMainWindow):
         loader = QUiLoader()
         self.window = loader.load(r"UI/prettyMain.ui", self)
 
+        self.window.listOfExercises.clear()
+        for ex in exercises:
+            self.window.listOfExercises.addItem(ex.title)
         # connect signals
         self.window.uploadButt.clicked.connect(self.on_upload)
         self.window.evaluateButt.clicked.connect(self.on_evaluate)
@@ -129,7 +135,7 @@ class MainWindow(QMainWindow):
         
     def on_play(self):
         # Open the .wav file
-        path = r'UI/exercises/' + self.window.listOfExercises.currentText () + r'.wav'
+        path = bundle_path + exercises[self.window.listOfExercises.currentIndex()].wavFile
         wav_file = wave.open(path, 'rb')
 
         # Initialize PyAudio
@@ -157,6 +163,13 @@ class MainWindow(QMainWindow):
 
     def on_evaluate(self):
         if self.window.pathFile.text():
+            proc = subprocess.Popen(["../GuitarTrainer", "c", self.window.pathFile.text(),exercises[self.window.listOfExercises.currentIndex()].file], stdout=subprocess.PIPE)
+            for i in range(2):
+                results[i] = int(float(proc.stdout.readline())* 100)
+            print(results)
+
+            win2.create_chart(results[0], results[1], results[2])
+
             widget.setCurrentWidget(widget.widget(widget.currentIndex() + 1))
         else:
             msgBox = QMessageBox()
@@ -166,20 +179,22 @@ class MainWindow(QMainWindow):
             msgBox.exec()
 
 
+bundle_path = "./"
+files = [f for f in os.listdir(bundle_path) if f.endswith('.bnd')]
+print(os.listdir(bundle_path))
+print(files)
+exercises = []
+for f in files:
+    with open(f, "rb") as file:
+        bundle = bundle_pb2.Bundle()
+        bundle.ParseFromString(file.read())
+        print(bundle)
+        for e in bundle.exercises:
+            exercises.append(e)
 # QMessageBox
 # if __name__ == '__main__':
-# bundle_path = "."
-# files = [f for f in listdir(bundle_path) if isfile(join(bundle_path, f)) and f.endswith('.bnd')]
-# exercises = []
-# for f in files:
-#     with open(f, "rb") as file:
-#         bundle = bundle_pb2.Bundle()
-#         bundle.ParseFromString(file.read())
-#         print(bundle)
-#         for e in bundle.exercises:
-#             exercises.append(e)
 #
-# print(exercises)
+print(exercises)
 
 app = QApplication(sys.argv)
 # ex = App()

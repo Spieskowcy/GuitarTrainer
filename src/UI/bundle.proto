@@ -1,11 +1,9 @@
 syntax = "proto2";
 
 message Exercise {
-    required string title = 1;
-    optional string tooltip = 2;
-    required string file = 3;
+  required string title = 1;
+  required string file = 3;
+  required string wavFile = 4;
 }
 
-message Bundle{
-    repeated Exercise exercises = 1;
-}
+message Bundle { repeated Exercise exercises = 1; }
