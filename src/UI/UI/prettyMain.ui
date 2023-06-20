@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>370</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="prettyBack">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>30</y>
+      <width>300</width>
+      <height>420</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/images/PianoHero.png);
+border-radius:20px;</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="uploadButt">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>130</y>
+      <width>200</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Franklin Gothic Demi</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">bacground-color:rgba(0, 0, 0, 0);
+border:2px solid rgba(255, 222, 175, 0.8);
+color:rgba(255, 255, 255, 230);
+padding-bottom:7px;
+border-radius:5px;
+
+</string>
+    </property>
+    <property name="text">
+     <string>upload file</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pathFile">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>170</y>
+      <width>200</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">bacground-color:rgba(0, 0, 0, 0);
+border:none;
+border-bottom:2px solid rgba(255, 222, 175, 0.8);
+color:rgba(0, 0, 0, 255);
+padding-bottom:7px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="listOfExercises">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>210</y>
+      <width>141</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">bacground-color:rgba(0, 0, 0, 0);
+border:2px solid rgba(255, 222, 175, 0.8);
+color:rgba(0, 0, 0, 255);
+padding-bottom:7px;
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>ex1</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="evaluateButt">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>330</y>
+      <width>70</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Franklin Gothic Demi</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">bacground-color:rgba(0, 0, 0, 0);
+border:2px solid rgba(255, 222, 175, 0.8);
+color:rgba(255, 255, 255, 230);
+padding-bottom:7px;
+border-radius:5px;
+
+</string>
+    </property>
+    <property name="text">
+     <string>evaluate</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>50</y>
+      <width>211</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/images/GuitarTrainer.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playButt">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>210</y>
+      <width>51</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Franklin Gothic Demi</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">bacground-color:rgba(0, 0, 0, 0);
+border:2px solid rgba(255, 222, 175, 0.8);
+color:rgba(255, 255, 255, 230);
+padding-bottom:7px;
+border-radius:5px;
+
+</string>
+    </property>
+    <property name="text">
+     <string>play</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="images/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>

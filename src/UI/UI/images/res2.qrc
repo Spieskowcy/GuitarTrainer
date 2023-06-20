@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="images">
+    <file>Results.png</file>
+    <file>Zrzut ekranu 2023-05-17 131243.png</file>
+    <file>PianoHero.png</file>
+  </qresource>
+</RCC>
