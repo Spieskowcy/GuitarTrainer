@@ -8,11 +8,11 @@ void ArticulationLength::CalculateLength()
 {
     for(int i=0; i<total; i++)
     {
-        if(i<50)
+        if(i<numberOfSamples)
             continue;
         
         if(absRaw[i]>=startingThreshold && i-startIndex > ATTACK_TIME)
-        {
+        { 
             if(currentSound!=nullptr)
             {
                 SaveSound(i);
@@ -33,7 +33,6 @@ void ArticulationLength::CalculateLength()
             {
                 hearable = false;
                 SaveSound(i);
-                
             }
         }
     }
@@ -78,10 +77,9 @@ void ArticulationLength::ReadSegments() {
     absRaw = new float[total];
     int currentIndex = 0;
     for(int i=0; i<totalSegments; i++)
-    
     {
         Segment* currentSegment = segments.front();
-        for(int j=0; j<currentSegment->probesNo; j++)
+        for(int j=0; j<numberOfSamples; j++)
         {
             absRaw[currentIndex] = abs(currentSegment->rawSignal[j]);
             currentIndex++;
@@ -89,14 +87,13 @@ void ArticulationLength::ReadSegments() {
         segments.pop();
         delete currentSegment;
     }
-    startingThreshold = *std::max_element(absRaw+50,absRaw+total) *(1-RELATIVE_OFFSET_TO_MAX);
+    startingThreshold = *std::max_element(absRaw+numberOfSamples,absRaw+total-numberOfSamples) * (1-RELATIVE_OFFSET_TO_MAX);
 }
 
 ArticulationLength::ArticulationLength(int numberOfSamples, std::string filePath)
 {
     this->numberOfSamples = numberOfSamples;
     this->filePath = filePath;
-    absRaw = new float[this->numberOfSamples];
     ReadSegments();
     CalculateLength();
 }
