@@ -23,6 +23,9 @@ float Module::CompareWithReference(std::vector<Sound> input, std::vector<Sound> 
     for(int i = 0; i < input.size(); i++){
         result -= (std::abs(input[i].diff - ref[i].diff)) * MULTIPLIER;
     }
+    if (result < 0){
+        return 0;
+    }
     return result;
 }
 
