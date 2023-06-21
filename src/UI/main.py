@@ -40,14 +40,14 @@ class ResultsScreen(QMainWindow):
         self.window.prettyBack.setAutoFillBackground(True)
 
 
-    def create_chart(self, p, r, l):
+    def create_chart(self, p, r, a):
         set_0 = QBarSet("pitch")
         set_1 = QBarSet("rhythm")
-        set_2 = QBarSet("length")
+        set_2 = QBarSet("articulation")
 
         set_0.append([p])
         set_1.append([r])
-        set_2.append([l])
+        set_2.append([a])
 
         series = QBarSeries()
         series.append(set_0)
