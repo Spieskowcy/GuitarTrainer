@@ -23,21 +23,21 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(450, 550)
+        Form.resize(945, 949)
         self.widget = QWidget(Form)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(40, 40, 370, 480))
+        self.widget.setGeometry(QRect(0, 0, 600, 800))
         self.prettyBack = QLabel(self.widget)
         self.prettyBack.setObjectName(u"prettyBack")
-        self.prettyBack.setGeometry(QRect(35, 30, 300, 420))
+        self.prettyBack.setGeometry(QRect(0, 0, 600, 800))
         self.prettyBack.setStyleSheet(u"border-image: url(:/images/PianoHero.png);\n"
 "border-radius:20px;")
         self.uploadButt = QPushButton(self.widget)
         self.uploadButt.setObjectName(u"uploadButt")
-        self.uploadButt.setGeometry(QRect(80, 130, 200, 30))
+        self.uploadButt.setGeometry(QRect(50, 130, 500, 75))
         font = QFont()
         font.setFamilies([u"Franklin Gothic Demi"])
-        font.setPointSize(11)
+        font.setPointSize(30)
         self.uploadButt.setFont(font)
         self.uploadButt.setStyleSheet(u"bacground-color:rgba(0, 0, 0, 0);\n"
 "border:2px solid rgba(255, 222, 175, 0.8);\n"
@@ -48,12 +48,15 @@ class Ui_Form(object):
 "")
         self.pathFile = QLineEdit(self.widget)
         self.pathFile.setObjectName(u"pathFile")
-        self.pathFile.setGeometry(QRect(80, 170, 200, 30))
+        self.pathFile.setGeometry(QRect(50, 220, 500, 75))
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pathFile.sizePolicy().hasHeightForWidth())
         self.pathFile.setSizePolicy(sizePolicy)
+        font1 = QFont()
+        font1.setPointSize(30)
+        self.pathFile.setFont(font1)
         self.pathFile.setStyleSheet(u"bacground-color:rgba(0, 0, 0, 0);\n"
 "border:none;\n"
 "border-bottom:2px solid rgba(255, 222, 175, 0.8);\n"
@@ -62,7 +65,8 @@ class Ui_Form(object):
         self.listOfExercises = QComboBox(self.widget)
         self.listOfExercises.addItem("")
         self.listOfExercises.setObjectName(u"listOfExercises")
-        self.listOfExercises.setGeometry(QRect(80, 210, 141, 30))
+        self.listOfExercises.setGeometry(QRect(50, 310, 350, 75))
+        self.listOfExercises.setFont(font1)
         self.listOfExercises.setStyleSheet(u"bacground-color:rgba(0, 0, 0, 0);\n"
 "border:2px solid rgba(255, 222, 175, 0.8);\n"
 "color:rgba(0, 0, 0, 255);\n"
@@ -70,7 +74,7 @@ class Ui_Form(object):
 "")
         self.evaluateButt = QPushButton(self.widget)
         self.evaluateButt.setObjectName(u"evaluateButt")
-        self.evaluateButt.setGeometry(QRect(150, 330, 70, 30))
+        self.evaluateButt.setGeometry(QRect(200, 520, 200, 75))
         self.evaluateButt.setFont(font)
         self.evaluateButt.setStyleSheet(u"bacground-color:rgba(0, 0, 0, 0);\n"
 "border:2px solid rgba(255, 222, 175, 0.8);\n"
@@ -81,11 +85,11 @@ class Ui_Form(object):
 "")
         self.label = QLabel(self.widget)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(80, 50, 211, 50))
+        self.label.setGeometry(QRect(200, 50, 211, 50))
         self.label.setStyleSheet(u"background-image: url(:/images/GuitarTrainer.png);")
         self.playButt = QPushButton(self.widget)
         self.playButt.setObjectName(u"playButt")
-        self.playButt.setGeometry(QRect(230, 210, 51, 30))
+        self.playButt.setGeometry(QRect(425, 310, 100, 75))
         self.playButt.setFont(font)
         self.playButt.setStyleSheet(u"bacground-color:rgba(0, 0, 0, 0);\n"
 "border:2px solid rgba(255, 222, 175, 0.8);\n"

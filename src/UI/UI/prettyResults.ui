@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>445</width>
-    <height>552</height>
+    <width>952</width>
+    <height>903</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,19 +16,19 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>40</y>
-     <width>370</width>
-     <height>480</height>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>800</height>
     </rect>
    </property>
    <widget class="QLabel" name="prettyBack">
     <property name="geometry">
      <rect>
-      <x>35</x>
-      <y>30</y>
-      <width>300</width>
-      <height>420</height>
+      <x>0</x>
+      <y>0</y>
+      <width>600</width>
+      <height>800</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -42,16 +42,16 @@ border-radius:20px;</string>
    <widget class="QPushButton" name="menuButt">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>330</y>
-      <width>70</width>
-      <height>30</height>
+      <x>200</x>
+      <y>520</y>
+      <width>200</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Franklin Gothic Demi</family>
-      <pointsize>11</pointsize>
+      <pointsize>30</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -70,7 +70,7 @@ border-radius:5px;
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>244</x>
       <y>50</y>
       <width>115</width>
       <height>50</height>
@@ -86,10 +86,10 @@ border-radius:5px;
    <widget class="QWidget" name="chartView" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>80</y>
-      <width>291</width>
-      <height>221</height>
+      <x>0</x>
+      <y>100</y>
+      <width>601</width>
+      <height>371</height>
      </rect>
     </property>
    </widget>

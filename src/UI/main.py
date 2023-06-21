@@ -40,14 +40,14 @@ class ResultsScreen(QMainWindow):
         self.window.prettyBack.setAutoFillBackground(True)
 
 
-    def create_chart(self, p, r, a):
+    def create_chart(self, p, r, l):
         set_0 = QBarSet("pitch")
         set_1 = QBarSet("rhythm")
-        set_2 = QBarSet("articulation")
+        set_2 = QBarSet("length")
 
         set_0.append([p])
         set_1.append([r])
-        set_2.append([a])
+        set_2.append([l])
 
         series = QBarSeries()
         series.append(set_0)
@@ -74,15 +74,25 @@ class ResultsScreen(QMainWindow):
         chart.legend().setBackgroundVisible(False)
         chart.setBackgroundVisible(False)
 
+        # Set font size
+        font = QFont("Arial")
+        font.setPixelSize(25)
+        chart.legend().setFont(font)
+
         # Set font color
         font_color = QColor(255, 255, 255)
         axis_x.setLabelsBrush(font_color)
         axis_y.setLabelsBrush(font_color)
+
+        # Set font size
+        axis_x.setLabelsFont(font)
+        axis_y.setLabelsFont(font)
+
         chart.legend().setLabelColor(font_color)
 
         self.chart_view = QChartView(chart)
         self.chart_view.setRenderHint(QPainter.Antialiasing)
-        self.chart_view.setGeometry(0, 0, 300, 250)
+        self.chart_view.setGeometry(50, 0, 500, 400)
 
         # Set background color to transparent
         self.chart_view.setStyleSheet("background-color: transparent;")
@@ -165,10 +175,10 @@ class MainWindow(QMainWindow):
 
     def on_evaluate(self):
         if self.window.pathFile.text():
-            proc = subprocess.Popen(["../GuitarTrainer", "c", self.window.pathFile.text(),exercises[self.window.listOfExercises.currentIndex()].file], stdout=subprocess.PIPE)
-            for i in range(2):
-                results[i] = int(float(proc.stdout.readline())* 100)
-            print(results)
+        #     proc = subprocess.Popen(["../GuitarTrainer", "c", self.window.pathFile.text(),exercises[self.window.listOfExercises.currentIndex()].file], stdout=subprocess.PIPE)
+        #     for i in range(2):
+        #         results[i] = int(float(proc.stdout.readline())* 100)
+        #     print(results)
 
             win2.create_chart(results[0], results[1], results[2])
 
@@ -206,8 +216,8 @@ win2 = ResultsScreen()
 widget = QStackedWidget()
 widget.addWidget(win)
 widget.addWidget(win2)
-widget.setFixedWidth(450)
-widget.setFixedHeight(550)
+widget.setFixedWidth(600)
+widget.setFixedHeight(800)
 widget.setWindowFlag(Qt.FramelessWindowHint)
 widget.setAttribute(Qt.WA_TranslucentBackground)
 widget.show()
