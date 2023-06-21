@@ -12,6 +12,8 @@ import UI.images.res
 import wave
 import pyaudio
 
+import random
+
 
 class ResultsScreen(QMainWindow):
     def __init__(self, parent=None):
@@ -23,6 +25,7 @@ class ResultsScreen(QMainWindow):
         self.window.resultsTitle = QLineEdit()
         self.window.prettyBack = QLabel()
         self.window.chartView = QWidget()
+        self.chart_view = QChartView()
 
         # load ui
         loader = QUiLoader()
@@ -34,7 +37,8 @@ class ResultsScreen(QMainWindow):
         # change widgets properties
         self.window.prettyBack.setAutoFillBackground(True)
 
-        self.create_chart(30, 70, 50)
+        #num1 = random.choice([10,20,30,40,50,60])
+        self.create_chart(random.choice([10,20,30,40,50,60]), random.choice([10,20,30,40,50,60]), random.choice([10,20,30,40,50,60]))
 
     def create_chart(self, p, r, a):
         set_0 = QBarSet("pitch")
@@ -87,6 +91,7 @@ class ResultsScreen(QMainWindow):
 
     @Slot()
     def menu_onclick(self):
+        self.chart_view.setParent(None)
         widget.setCurrentWidget(widget.widget(widget.currentIndex() - 1))
 
 
