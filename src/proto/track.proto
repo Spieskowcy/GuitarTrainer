@@ -3,4 +3,6 @@ syntax = "proto2";
 message Track {
   repeated int32 sequence = 1;
   required int32 bpm = 2;
+  repeated int32 length = 3;
+  repeated float amps = 4;
 }
