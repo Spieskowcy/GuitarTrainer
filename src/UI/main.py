@@ -27,6 +27,7 @@ class ResultsScreen(QMainWindow):
         self.window.resultsTitle = QLineEdit()
         self.window.prettyBack = QLabel()
         self.window.chartView = QWidget()
+        self.chart_view = QChartView()
 
         # load ui
         loader = QUiLoader()
@@ -79,17 +80,18 @@ class ResultsScreen(QMainWindow):
         axis_y.setLabelsBrush(font_color)
         chart.legend().setLabelColor(font_color)
 
-        chart_view = QChartView(chart)
-        chart_view.setRenderHint(QPainter.Antialiasing)
-        chart_view.setGeometry(0, 0, 300, 250)
+        self.chart_view = QChartView(chart)
+        self.chart_view.setRenderHint(QPainter.Antialiasing)
+        self.chart_view.setGeometry(0, 0, 300, 250)
 
         # Set background color to transparent
-        chart_view.setStyleSheet("background-color: transparent;")
+        self.chart_view.setStyleSheet("background-color: transparent;")
 
-        chart_view.setParent(self.window.chartView)
+        self.chart_view.setParent(self.window.chartView)
 
     @Slot()
     def menu_onclick(self):
+        self.chart_view.setParent(None)
         widget.setCurrentWidget(widget.widget(widget.currentIndex() - 1))
 
 
