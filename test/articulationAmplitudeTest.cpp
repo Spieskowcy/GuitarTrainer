@@ -2,6 +2,7 @@
 
 
 #include "ArticulationAmplitude.hpp"
+#include "FFT.hpp"
 #include <string.h>
 #include <vector>
 #include <memory>
@@ -41,7 +42,6 @@ TEST(articulationAmplitudeTest, FewTonesOneByOne){
 	ASSERT_EQ(12, module.sounds[1].segment_id);
 }
 
-#include <iostream>
 TEST(articulationAmplitudeWavTest, ComparingTwoSameFiles){
 	//Arange
     constexpr int PROBES_NO = 32;
@@ -51,6 +51,15 @@ TEST(articulationAmplitudeWavTest, ComparingTwoSameFiles){
     	
     ArticulationAmplitude::Module refModule(PROBES_NO);
     auto refData = refModule.ConvertWavToVector("../rsc/test3.wav");
+
+    // calculate fft on segment vectors
+    auto fftModule = FFT(PROBES_NO);
+    for(int i = 0; i < mainData.size(); i++){
+        fftModule.Calculate(mainData[i].get());
+    }
+    for(int i = 0; i < refData.size(); i++){
+        fftModule.Calculate(refData[i].get());
+    }
 
 	//Act
 	mainModule.Calculate(mainData);
