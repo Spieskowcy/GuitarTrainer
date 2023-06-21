@@ -1,5 +1,6 @@
 #pragma once
 #include "Segment.hpp"
+#include "WavHandler.h"
 #include <vector>
 #include <memory>
 
@@ -12,13 +13,17 @@ struct Sound {
 	float diff;
 	int segment_id;
 };
+    using vecSegs = std::vector<std::shared_ptr<Segment>>;
 
 class Module {
 public:
+    vecSegs ConvertWavToVector(std::string file);
+    static float CompareWithReference(std::vector<Sound> input, std::vector<Sound> ref);
+
 	Module(int probesNo) : probesNo(probesNo) {};
 	
 	std::vector<Sound> sounds;
-	void Calculate(std::vector<std::shared_ptr<Segment>> segments);
+	void Calculate(vecSegs segments);
 private:
 	struct MaxValue {
 		float value = 0.0f;

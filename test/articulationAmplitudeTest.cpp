@@ -41,4 +41,23 @@ TEST(articulationAmplitudeTest, FewTonesOneByOne){
 	ASSERT_EQ(12, module.sounds[1].segment_id);
 }
 
+#include <iostream>
+TEST(articulationAmplitudeWavTest, ComparingTwoSameFiles){
+	//Arange
+    constexpr int PROBES_NO = 32;
 
+	ArticulationAmplitude::Module mainModule(PROBES_NO);
+    auto mainData = mainModule.ConvertWavToVector("../rsc/test3.wav");
+    	
+    ArticulationAmplitude::Module refModule(PROBES_NO);
+    auto refData = refModule.ConvertWavToVector("../rsc/test3.wav");
+
+	//Act
+	mainModule.Calculate(mainData);
+	refModule.Calculate(refData);
+
+    auto value = ArticulationAmplitude::Module::CompareWithReference(mainModule.sounds, refModule.sounds);
+
+	//Assert
+	ASSERT_EQ(1, value);
+}

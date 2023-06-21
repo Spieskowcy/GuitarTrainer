@@ -2,6 +2,30 @@
 
 using namespace ArticulationAmplitude;
 
+vecSegs Module::ConvertWavToVector(std::string file){
+    vecSegs result;
+    WavHandler handler(file.c_str());
+    while(!handler.FinishedReading()){
+        auto seg = std::make_shared<Segment>(probesNo);
+        handler.ReadRawData(seg.get());
+        result.push_back(seg);
+    }
+    return result;
+}
+
+float Module::CompareWithReference(std::vector<Sound> input, std::vector<Sound> ref){
+    constexpr float MULTIPLIER = 1;
+    if(input.size() != ref.size()){
+        return 0;
+    }
+    
+    float result = 1;
+    for(int i = 0; i < input.size(); i++){
+        result -= (std::abs(input[i].diff - ref[i].diff)) * MULTIPLIER;
+    }
+    return result;
+}
+
 void Module::Calculate(std::vector<std::shared_ptr<Segment>> segments){
 	float lastMax=0;
 	int seg_id = 0;
