@@ -40,14 +40,14 @@ class ResultsScreen(QMainWindow):
         self.window.prettyBack.setAutoFillBackground(True)
 
 
-    def create_chart(self, p, r, l):
+    def create_chart(self, p, r, a):
         set_0 = QBarSet("pitch")
         set_1 = QBarSet("rhythm")
-        set_2 = QBarSet("length")
+        set_2 = QBarSet("articulation")
 
         set_0.append([p])
         set_1.append([r])
-        set_2.append([l])
+        set_2.append([a])
 
         series = QBarSeries()
         series.append(set_0)
@@ -175,10 +175,10 @@ class MainWindow(QMainWindow):
 
     def on_evaluate(self):
         if self.window.pathFile.text():
-        #     proc = subprocess.Popen(["../GuitarTrainer", "c", self.window.pathFile.text(),exercises[self.window.listOfExercises.currentIndex()].file], stdout=subprocess.PIPE)
-        #     for i in range(2):
-        #         results[i] = int(float(proc.stdout.readline())* 100)
-        #     print(results)
+            proc = subprocess.Popen(["../GuitarTrainer", "c", self.window.pathFile.text(),exercises[self.window.listOfExercises.currentIndex()].file], stdout=subprocess.PIPE)
+            for i in range(2):
+                 results[i] = int(float(proc.stdout.readline())* 100)
+            print(results)
 
             win2.create_chart(results[0], results[1], results[2])
 
