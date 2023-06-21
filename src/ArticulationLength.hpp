@@ -18,11 +18,11 @@ struct Sound {
 
 class ArticulationLength {
 private:
-    const float RELATIVE_OFFSET_TO_MAX=0.1;
-    float startingThreshold;
+    const float RELATIVE_OFFSET_TO_MAX=0.15;
+    float startingThreshold = 0;
     const float CONTINUE_THRESHOLD = 150000000;
     const int COUNTER_THRESHOLD = 100;
-    const int MIN_LENGTH = 4000;
+    const int MIN_LENGTH = 2000;
     const int ATTACK_TIME = 200;
 
     int numberOfSamples;
@@ -35,7 +35,7 @@ private:
     int notHearableSoundCounter = 0;
     bool hearable = false;
     Sound* currentSound = nullptr;
-    int startIndex;
+    int startIndex = 0;
 
     void SaveSound(int currentIndex);
 public:
