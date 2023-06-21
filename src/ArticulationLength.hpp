@@ -22,7 +22,7 @@ private:
     float startingThreshold;
     const float CONTINUE_THRESHOLD = 150000000;
     const int COUNTER_THRESHOLD = 100;
-    const int MIN_LENGTH = 2000;
+    const int MIN_LENGTH = 4000;
     const int ATTACK_TIME = 200;
 
     int numberOfSamples;
